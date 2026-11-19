@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#b34a12">
+<meta name="description" content="ポモドーロ式の集中タイマー。集中と休憩を自動で切り替え、今日の実績と直近7日の統計を表示します。">
+<title>しゅうちゅうや｜集中タイマー</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🍅 しゅうちゅうや</h1>
+  <p class="subtitle">ポモドーロ式 集中タイマー</p>
+</header>
+
+<main>
+  <section class="panel timer-panel">
+    <p id="phaseLabel" class="phase-label">集中</p>
+    <div class="ring-wrap">
+      <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="ring-bg" cx="100" cy="100" r="88"></circle>
+        <circle id="ringFg" class="ring-fg" cx="100" cy="100" r="88"></circle>
+      </svg>
+      <div class="time-display">
+        <span id="timeText">25:00</span>
+        <span id="stateText" class="state-text">待機中</span>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="startPauseBtn" class="primary-btn" type="button">▶ 開始</button>
+      <button id="resetBtn" class="ghost-btn" type="button">↺ リセット</button>
+    </div>
+    <p class="hint">集中が終わると自動で休憩に、休憩が終わると自動で次の集中に切り替わります。</p>
+  </section>
+
+  <section class="panel">
+    <h2>今日の実績</h2>
+    <div class="today-stats">
+      <div class="stat-box">
+        <span id="todaySessions" class="stat-num">0</span>
+        <span class="stat-label">完了セッション</span>
+      </div>
+      <div class="stat-box">
+        <span id="todayMinutes" class="stat-num">0分</span>
+        <span class="stat-label">集中合計</span>
+      </div>
+    </div>
+    <h3>直近7日の集中時間</h3>
+    <div id="weekChart" class="week-chart" role="img" aria-label="直近7日の集中時間の棒グラフ"></div>
+  </section>
+
+  <section class="panel">
+    <h2>設定</h2>
+    <div class="settings-grid">
+      <label>
+        集中時間（分）
+        <input id="workInput" type="number" min="5" max="90" step="1" inputmode="numeric">
+      </label>
+      <label>
+        休憩時間（分）
+        <input id="breakInput" type="number" min="1" max="30" step="1" inputmode="numeric">
+      </label>
+    </div>
+    <p class="hint">集中は5〜90分、休憩は1〜30分。設定は自動で保存され、待機中はすぐに反映されます。</p>
+  </section>
+</main>
+
+<footer>
+  <p>しゅうちゅうや ― ポモドーロ・テクニックで集中をサポート</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
