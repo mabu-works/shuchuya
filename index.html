@@ -3,16 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#b34a12">
+<meta name="theme-color" content="#0a0f1c">
 <meta name="description" content="ポモドーロ式の集中タイマー。集中と休憩を自動で切り替え、今日の実績と直近7日の統計を表示します。">
 <title>しゅうちゅうや｜集中タイマー</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
+<script>
+try {
+  var savedTheme = localStorage.getItem("shuchuya-theme");
+  if (savedTheme === "light" || savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
+} catch (e) { /* テーマ保存が使えない環境ではダークを既定にする */ }
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
+<nav class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top">🍅 しゅうちゅうや</a>
+    <span class="topbar-links">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="テーマ切り替え">🌙</button>
+    </span>
+  </div>
+</nav>
+
+<header class="site-header" id="top">
+  <p class="eyebrow">FOCUS TIMER</p>
   <h1>🍅 しゅうちゅうや</h1>
   <p class="subtitle">ポモドーロ式 集中タイマー</p>
 </header>
@@ -69,7 +87,7 @@
   </section>
 </main>
 
-<footer>
+<footer class="site-footer">
   <p>しゅうちゅうや ― ポモドーロ・テクニックで集中をサポート</p>
 </footer>
 

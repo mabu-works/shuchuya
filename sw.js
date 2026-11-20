@@ -1,4 +1,4 @@
-const CACHE_NAME = "shuchuya-v1";
+const CACHE_NAME = "shuchuya-v2";
 const ASSETS = [
   "./",
   "./index.html",
