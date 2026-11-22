@@ -2,6 +2,9 @@
 
 ポモドーロ・テクニック式の集中タイマーです。ビルド不要の静的サイトで、PWA としてインストールもできます。
 
+🌐 公開先: [shuchuya.vercel.app](https://shuchuya.vercel.app)
+📜 更新履歴: [CHANGELOG.md](CHANGELOG.md)
+
 ## ✨ 機能
 
 - 集中（初期25分）と休憩（初期5分）を**自動で切り替え**（集中終了→休憩→次の集中…）
