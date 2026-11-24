@@ -27,6 +27,7 @@
 
 `windows/` フォルダに、同じ仕様の Windows アプリ（.NET 8 / WinForms）があります。集中／休憩の自動切り替え、進捗リング、今日の実績と直近7日のグラフまで Web 版と同じで、設定と実績も保存されます（保存先は Web 版の localStorage の代わりに `%APPDATA%\Shuchuya\data.json`）。オフラインで使えます。
 
+- ダウンロード: [GitHub Releases（Windows版 v1.0.0）](https://github.com/mabu-works/shuchuya/releases/tag/v1.0.0)
 - ビルド: `windows/build.bat`（Windows）または `windows/build.sh` で `windows/dist/Shuchuya.exe` を生成
 - フェーズ終了の通知音は、Web 版のチャイムの代わりに Windows のシステムサウンドを使います
 
