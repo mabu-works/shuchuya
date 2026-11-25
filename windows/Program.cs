@@ -18,7 +18,9 @@ namespace Shuchuya
         }
     }
 
-    /* ===== 保存データ（Web版の localStorage の代わりに JSON ファイル） ===== */
+    // ==========================================
+// 💾 保存データ（Web版の localStorage の代わりに JSON ファイル）
+// ==========================================
     internal sealed class DayStat
     {
         public int Sessions { get; set; }
@@ -32,7 +34,9 @@ namespace Shuchuya
         public Dictionary<string, DayStat> Stats { get; set; } = new Dictionary<string, DayStat>();
     }
 
-    /* ===== 進捗リング（Web版の SVG リングを GDI+ で描画） ===== */
+    // ==========================================
+// ⭕ 進捗リング（Web版の SVG リングを GDI+ で描画）
+// ==========================================
     internal sealed class RingPanel : Panel
     {
         public string PhaseText = "集中";
@@ -93,7 +97,9 @@ namespace Shuchuya
         }
     }
 
-    /* ===== 直近7日の棒グラフ ===== */
+    // ==========================================
+// 📊 直近7日の棒グラフ
+// ==========================================
     internal sealed class WeekChartPanel : Panel
     {
         public List<(string Label, int Minutes, bool IsToday)> Days = new List<(string, int, bool)>();
@@ -300,8 +306,9 @@ namespace Shuchuya
             return new Label { Text = text, ForeColor = Muted, Location = new Point(x, y), AutoSize = true };
         }
 
-        /* ===== タイマー本体（Web版と同じ endAt 方式） ===== */
-
+        // ==========================================
+// ⏱️ タイマー本体（Web版と同じ endAt 方式）
+// ==========================================
         private int PhaseDuration(string p) => (p == "work" ? data.Work : data.Break) * 60;
 
         private static string Fmt(int sec)
@@ -388,8 +395,9 @@ namespace Shuchuya
             UpdateUI();
         }
 
-        /* ===== UI 更新 ===== */
-
+        // ==========================================
+// 🖥️ UI 更新
+// ==========================================
         private void UpdateUI()
         {
             bool isBreak = phase == "break";
@@ -402,7 +410,7 @@ namespace Shuchuya
 
             startPauseBtn.Text = running ? "⏸ 一時停止" : (remainSec < totalSec ? "▶ 再開" : "▶ 開始");
 
-            // タイトルバーに残り時間を表示（待機中は既定タイトル）
+            // 🕐 タイトルバーに残り時間を表示（待機中は既定タイトル）
             if (!running && remainSec == totalSec && phase == "work")
             {
                 Text = DefaultTitle;
@@ -413,8 +421,9 @@ namespace Shuchuya
             }
         }
 
-        /* ===== 統計 ===== */
-
+        // ==========================================
+// 📊 統計
+// ==========================================
         private static string DateKey(DateTime d) => d.ToString("yyyy-MM-dd");
 
         private void RecordWorkSession()
@@ -449,8 +458,9 @@ namespace Shuchuya
             weekChart.Invalidate();
         }
 
-        /* ===== 保存・読み込み ===== */
-
+        // ==========================================
+// 💾 保存・読み込み
+// ==========================================
         private static string DataPath()
         {
             string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shuchuya");
@@ -477,7 +487,7 @@ namespace Shuchuya
             }
             catch (Exception)
             {
-                // 読み込めない場合は既定値で始める（Web版と同じ扱い）
+                // 📥 読み込めない場合は既定値で始める（Web版と同じ扱い）
             }
             return new AppData();
         }
@@ -490,7 +500,7 @@ namespace Shuchuya
             }
             catch (Exception)
             {
-                // 保存できない環境では無視
+                // 💾 保存できない環境では無視
             }
         }
     }

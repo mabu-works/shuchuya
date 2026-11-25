@@ -9,6 +9,7 @@ const ASSETS = [
   "./icons/icon-512.png",
 ];
 
+// 📦 インストール時に中核ファイルをキャッシュする
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
@@ -16,6 +17,7 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
+// 🧹 古いキャッシュを削除して有効化する
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
@@ -27,6 +29,7 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+// 🌐 ネットワーク優先で取得し、取得できたらキャッシュへ保存する
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   if (event.request.method !== "GET" || url.origin !== self.location.origin) {

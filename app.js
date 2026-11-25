@@ -1,17 +1,18 @@
 "use strict";
 
-/* ============================================================
-   しゅうちゅうや ― ポモドーロ式 集中タイマー
-   集中と休憩を自動で切り替え、実績を localStorage に記録します。
-   ============================================================ */
+// ==========================================
+// 🍅 しゅうちゅうや ― ポモドーロ式 集中タイマー
+// 集中と休憩を自動で切り替え、実績を localStorage に記録します。
+// ==========================================
 
 const SETTINGS_KEY = "shuchuya-settings-v1";
 const STATS_KEY = "shuchuya-stats-v1";
 const DEFAULT_TITLE = document.title;
 const RING_C = 2 * Math.PI * 88; // SVG 円の円周（r=88）
 
-/* ---------- 設定 ---------- */
-
+// ------------------------------------------
+// ⚙️ 設定
+// ------------------------------------------
 function clamp(n, min, max, fallback) {
   n = Number(n);
   if (!Number.isFinite(n)) return fallback;
@@ -38,8 +39,9 @@ function saveSettings() {
   } catch (e) {}
 }
 
-/* ---------- 統計 ---------- */
-
+// ------------------------------------------
+// 📊 統計
+// ------------------------------------------
 function dateKey(d) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -72,8 +74,9 @@ function recordWorkSession() {
   renderStats();
 }
 
-/* ---------- 通知音（Web Audio） ---------- */
-
+// ------------------------------------------
+// 🔔 通知音（Web Audio）
+// ------------------------------------------
 let audioCtx = null;
 function ensureAudio() {
   if (!audioCtx) {
@@ -103,8 +106,9 @@ function playChime(kind) {
   });
 }
 
-/* ---------- タイマー本体 ---------- */
-
+// ------------------------------------------
+// ⏱️ タイマー本体
+// ------------------------------------------
 let phase = "work"; // "work" | "break"
 let totalSec = settings.work * 60;
 let remainSec = totalSec;
@@ -181,8 +185,9 @@ function onPhaseEnd() {
   updateUI();
 }
 
-/* ---------- UI ---------- */
-
+// ------------------------------------------
+// 🖥️ UI
+// ------------------------------------------
 const phaseLabel = document.getElementById("phaseLabel");
 const timeText = document.getElementById("timeText");
 const stateText = document.getElementById("stateText");
@@ -219,7 +224,7 @@ function updateUI() {
       ? "▶ 再開"
       : "▶ 開始";
 
-  // タブタイトルに残り時間を表示（待機中は既定タイトル）
+  // 🕐 タブタイトルに残り時間を表示（待機中は既定タイトル）
   if (!running && remainSec === totalSec && phase === "work") {
     document.title = DEFAULT_TITLE;
   } else {
@@ -235,8 +240,9 @@ startPauseBtn.addEventListener("click", () => {
 
 resetBtn.addEventListener("click", resetTimer);
 
-/* ---------- 設定 UI ---------- */
-
+// ------------------------------------------
+// 🖥️ 設定 UI
+// ------------------------------------------
 function applySettingsFromInputs() {
   settings.work = clamp(workInput.value, 5, 90, 25);
   settings.break = clamp(breakInput.value, 1, 30, 5);
@@ -254,8 +260,9 @@ function applySettingsFromInputs() {
 workInput.addEventListener("change", applySettingsFromInputs);
 breakInput.addEventListener("change", applySettingsFromInputs);
 
-/* ---------- 統計表示 ---------- */
-
+// ------------------------------------------
+// 📊 統計表示
+// ------------------------------------------
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
 function renderStats() {
@@ -263,7 +270,7 @@ function renderStats() {
   todaySessions.textContent = String(today.sessions);
   todayMinutes.textContent = today.minutes + "分";
 
-  // 直近7日（今日を含む）
+  // 📅 直近7日（今日を含む）
   const days = [];
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
@@ -302,15 +309,17 @@ function renderStats() {
   }
 }
 
-/* ---------- 初期化 ---------- */
-
+// ------------------------------------------
+// 🚀 初期化
+// ------------------------------------------
 workInput.value = String(settings.work);
 breakInput.value = String(settings.break);
 updateUI();
 renderStats();
 
-/* ---------- テーマ切り替え ---------- */
-
+// ------------------------------------------
+// 🌙 テーマ切り替え
+// ------------------------------------------
 (function initTheme() {
   var root = document.documentElement;
   if (!root || !root.getAttribute || !root.setAttribute) return;
