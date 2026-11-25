@@ -2,8 +2,13 @@
 
 ポモドーロ・テクニック式の集中タイマーです。ビルド不要の静的サイトで、PWA としてインストールもできます。
 
-🌐 公開先: [shuchuya.vercel.app](https://shuchuya.vercel.app)
-📜 更新履歴: [CHANGELOG.md](CHANGELOG.md)
+| 項目 | 内容 |
+|---|---|
+| バージョン | –（日付管理） |
+| 状態 | 公開中 |
+| 公開先 | [shuchuya.vercel.app](https://shuchuya.vercel.app) |
+| 実装 | 静的 Web サイト（HTML / CSS / JavaScript、ビルド不要） |
+| 更新履歴 | [CHANGELOG.md](CHANGELOG.md) |
 
 ## ✨ 機能
 
